@@ -16,11 +16,12 @@ import (
 
 // Configuration represents a YAML-formatted config file
 type Configuration struct {
-	SleepIQUsername string
-	SleepIQPassword string
-	PollInterval    time.Duration
-	InfluxDBURL     string
-	InfluxDBPort    int64
+	SleepIQUsername       string
+	SleepIQPassword       string
+	PollInterval          time.Duration
+	InfluxDBURL           string
+	InfluxDBPort          int64
+	InfluxDBSkipVerifySsl bool
 }
 
 // Load a config file and return the Config struct
@@ -82,7 +83,8 @@ func main() {
 		)
 	}
 	influxConf := influxdb.Config{
-		URL: *host,
+		URL:       *host,
+		UnsafeSsl: config.InfluxDBSkipVerifySsl,
 	}
 	influxConn, err := influxdb.NewClient(influxConf)
 	if err != nil {

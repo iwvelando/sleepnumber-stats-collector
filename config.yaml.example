@@ -3,8 +3,9 @@ sleepIQUsername: myusername # username for https://sleepiq.sleepnumber.com/#/log
 sleepIQPassword: mypassword # password for https://sleepiq.sleepnumber.com/#/login
 
 # InfluxDB Configuration
-influxDBUrl: 127.0.0.1 # IP or hostname where InfluxDB is running
-InfluxDBPort: 8086 # HTTP API listening port for InfluxDB
+influxDBUrl: https://127.0.0.1 # IP or hostname where InfluxDB is running
+influxDBPort: 8086 # HTTP API listening port for InfluxDB
+influxDBSkipVerifySsl: false # Toggle skipping SSL verification
 
 # Polling Configuration
 pollInterval: 10 # time in seconds to wait in between bed polling attempts
