@@ -133,7 +133,6 @@ func main() {
 
 	// Initialize the InfluxDB connection
 	influxClient, writeAPI, err := InfluxConnect(config)
-
 	if err != nil {
 		log.WithFields(log.Fields{
 			"op":    "main",
@@ -149,7 +148,7 @@ func main() {
 	go func() {
 		for err := range errorsCh {
 			log.WithFields(log.Fields{
-				"op":    "influxdb.WriteAll",
+				"op":    "main",
 				"error": err,
 			}).Error("encountered error on writing to InfluxDB")
 		}
