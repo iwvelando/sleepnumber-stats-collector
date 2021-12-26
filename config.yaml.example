@@ -1,20 +1,21 @@
+---
 # SleepIQ Configuration
-sleepIQUsername: myusername # username for https://sleepiq.sleepnumber.com/#/login
-sleepIQPassword: mypassword # password for https://sleepiq.sleepnumber.com/#/login
+sleepIQUsername: myusername  # username for https://sleepiq.sleepnumber.com/#/login
+sleepIQPassword: mypassword  # password for https://sleepiq.sleepnumber.com/#/login
 
 # Polling Configuration
-pollInterval: 10 # time in seconds to wait in between bed polling attempts
+pollInterval: 10  # time in seconds to wait in between bed polling attempts
 
 # InfluxDB Configuration
 influxDB:
-  address: https://127.0.0.1:8086 # HTTP address for InfluxDB
-  username: myuser # (optional) username for authenticating to InfluxDB v1
-  password: mypass # (optional) password for authenticating to InfluxDB v1
-  measurementPrefix: tesla_ # (optional) set a prefix for the InfluxDB measurement
-  database: mydb # (v1 only) database for use for InfluxDB v1
-  retentionPolicy: autogen # (v1 only) retention policy for database
-  token: mytoken # (v2 only) token for authenticating to InfluxDB; setting this assumes v2
-  organization: myorg # (v2 only) sets the organization
-  bucket: mybucket # (v2 only) sets the bucket
-  skipVerifySsl: false # toggle skipping SSL verification
-  flushInterval: 30 # flush interval (time limit before writing points to the db) in seconds; defaults to 30
+  address: https://127.0.0.1:8086  # HTTP address for InfluxDB
+  username: myuser  # (optional) username for authenticating to InfluxDB v1
+  password: mypass  # (optional) password for authenticating to InfluxDB v1
+  measurementPrefix: prefix_  # (optional) set a prefix for the InfluxDB measurement
+  database: mydb  # (v1 only) database for use for InfluxDB v1
+  retentionPolicy: autogen  # (v1 only) retention policy for database
+  token: mytoken  # (v2 only) token for authenticating to InfluxDB; setting this assumes v2
+  organization: myorg  # (v2 only) sets the organization
+  bucket: mybucket  # (v2 only) sets the bucket
+  skipVerifySsl: false  # toggle skipping SSL verification
+  flushInterval: 30  # flush interval (time limit before writing points to the db) in seconds; defaults to 30
