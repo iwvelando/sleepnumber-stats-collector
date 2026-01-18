@@ -19,3 +19,4 @@ influxDB:
   bucket: mybucket  # (v2 only) sets the bucket
   skipVerifySsl: false  # toggle skipping SSL verification
   flushInterval: 30  # flush interval (time limit before writing points to the db) in seconds; defaults to 30
+  httpRequestTimeout: 60  # HTTP request timeout in seconds; defaults to 60

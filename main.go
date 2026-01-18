@@ -4,16 +4,17 @@ import (
 	"crypto/tls"
 	"flag"
 	"fmt"
-	influx "github.com/influxdata/influxdb-client-go/v2"
-	influxAPI "github.com/influxdata/influxdb-client-go/v2/api"
-	"github.com/iwvelando/SleepIQ"
-	log "github.com/sirupsen/logrus"
-	"github.com/spf13/viper"
 	"os"
 	"os/signal"
 	"strings"
 	"syscall"
 	"time"
+
+	influx "github.com/influxdata/influxdb-client-go/v2"
+	influxAPI "github.com/influxdata/influxdb-client-go/v2/api"
+	sleepiq "github.com/iwvelando/SleepIQ"
+	log "github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 )
 
 // Configuration represents a YAML-formatted config file
@@ -25,17 +26,18 @@ type Configuration struct {
 }
 
 type InfluxDB struct {
-	Address           string
-	Username          string
-	Password          string
-	MeasurementPrefix string
-	Database          string
-	RetentionPolicy   string
-	Token             string
-	Organization      string
-	Bucket            string
-	SkipVerifySsl     bool
-	FlushInterval     uint
+	Address            string
+	Username           string
+	Password           string
+	MeasurementPrefix  string
+	Database           string
+	RetentionPolicy    string
+	Token              string
+	Organization       string
+	Bucket             string
+	SkipVerifySsl      bool
+	FlushInterval      uint
+	HTTPRequestTimeout uint
 }
 
 // Load a config file and return the Config struct
@@ -95,8 +97,13 @@ func InfluxConnect(config *Configuration) (influx.Client, influxAPI.WriteAPI, er
 		config.InfluxDB.FlushInterval = 30
 	}
 
+	if config.InfluxDB.HTTPRequestTimeout == 0 {
+		config.InfluxDB.HTTPRequestTimeout = 60
+	}
+
 	options := influx.DefaultOptions().
 		SetFlushInterval(1000 * config.InfluxDB.FlushInterval).
+		SetHTTPRequestTimeout(config.InfluxDB.HTTPRequestTimeout).
 		SetTLSConfig(&tls.Config{
 			InsecureSkipVerify: config.InfluxDB.SkipVerifySsl,
 		})
